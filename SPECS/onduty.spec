@@ -12,7 +12,7 @@ License:        commercial
 URL:            https://github.com/swisstxt/onduty
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Source0:        onduty.init
+Source0:        onduty.service
 
 BuildRequires: ruby rubygems rubygem-bundler
 BuildRequires: gcc libxml2 libxml2-devel libxslt libxslt-devel openssl-devel
@@ -73,14 +73,14 @@ fi
 %post
 if [ $1 == 1 ]; then
   gem install bundler
-  /sbin/chkconfig --add %{service_name}
-  /sbin/service %{service_name} start >/dev/null 2>&1
+  /usr/bin/systemctl start %{service_name}
+  /usr/bin/systemctl enable %{service_name}
 fi
 
 %preun
 if [ $1 = 0 ]; then
-  /sbin/service %{service_name} stop >/dev/null 2>&1
-  /sbin/chkconfig --del %{service_name}
+  /usr/bin/systemctl stop %{service_name}
+  /usr/bin/systemctl disable %{service_name}
 fi
 
 %clean

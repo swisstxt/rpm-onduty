@@ -12,7 +12,7 @@ clean:
 build: clean
 	cp -r ./SPECS/* ./rpmbuild/SPECS/ || true
 	cp -r ./SOURCES/* ./rpmbuild/SOURCES/ || true
-	rpmbuild -ba SPECS/pcache_api.spec \
+	rpmbuild -ba SPECS/onduty.spec \
 	--define "ver ${VERSION}" \
 	--define "rel ${RELEASE}" \
 	--define "_topdir %(pwd)/rpmbuild" \
