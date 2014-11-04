@@ -1,0 +1,15 @@
+[Unit]
+Description=Onduty Server
+After=syslog.target
+After=network.target
+
+[Service]
+Type=simple
+User=onduty
+Group=onduty
+ExecStart=/usr/local/bin/puma --config /srv/onduty/conf/puma.rb /srv/onduty/config.ru
+# Give a reasonable amount of time for the workers to start up/shut down
+TimeoutSec=300
+
+[Install]
+WantedBy=multi-user.target
