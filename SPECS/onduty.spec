@@ -86,7 +86,7 @@ fi
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%{_initrddir}/%{service_name}
+%{%_unitdir}/%{service_name}.service
 %defattr(-,root,root,-)
 %{appdir}
 %doc
