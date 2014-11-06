@@ -45,7 +45,7 @@ popd
 %build
 pushd %{name}
   gem install bundler
-  bundle install --deployment --binstubs
+  bundle install --deployment --binstubs --without development
 popd
 
 %install
@@ -73,7 +73,6 @@ fi
 
 %post
 if [ $1 == 1 ]; then
-  gem install bundler
   %service_add_post %{service_name}.service
 fi
 
@@ -86,7 +85,7 @@ fi
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%{%_unitdir}/%{service_name}.service
+%{_unitdir}/%{service_name}.service
 %defattr(-,root,root,-)
 %{appdir}
 %doc
