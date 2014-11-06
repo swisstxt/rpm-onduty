@@ -53,8 +53,7 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/%{appdir}
 mkdir -p $RPM_BUILD_ROOT/%{tmpdir}
 
-install -p -D -m 0755 %{SOURCE0} \
-  %{buildroot}%{%_unitdir}/%{service_name}.service
+install -p -D -m 0755 %{SOURCE0} %{buildroot}%{_unitdir}/%{service_name}.service
 
 pushd %{name}
   mv * .bundle $RPM_BUILD_ROOT/%{appdir}
