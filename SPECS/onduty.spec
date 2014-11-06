@@ -54,7 +54,7 @@ mkdir -p $RPM_BUILD_ROOT/%{appdir}
 mkdir -p $RPM_BUILD_ROOT/%{tmpdir}
 
 install -p -D -m 0755 %{SOURCE0} \
-  %{buildroot}%{_initrddir}/%{service_name}
+  %{buildroot}%{%_unitdir}/%{service_name}.service
 
 pushd %{name}
   mv * .bundle $RPM_BUILD_ROOT/%{appdir}
@@ -63,24 +63,23 @@ rm -f $RPM_BUILD_ROOT/%{appdir}/log/.gitkeep
 
 %pre
 if [ $1 -eq 1 ]; then
-    getent group %{onduty_group} > /dev/null || groupadd -r %{onduty_group}
-    getent passwd %{onduty_user} > /dev/null || \
-        useradd -r -d %{appdir} -g %{onduty_group} \
-        -s /sbin/nologin -c "Onduty server" %{onduty_user}
-    exit 0
+  getent group %{onduty_group} > /dev/null || groupadd -r %{onduty_group}
+  getent passwd %{onduty_user} > /dev/null || \
+    useradd -r -d %{appdir} -g %{onduty_group} \
+    -s /sbin/nologin -c "Onduty server" %{onduty_user}
+  exit 0
+  %service_add_pre %{service_name}.service
 fi
 
 %post
 if [ $1 == 1 ]; then
   gem install bundler
-  /usr/bin/systemctl start %{service_name}
-  /usr/bin/systemctl enable %{service_name}
+  %service_add_post %{service_name}.service
 fi
 
 %preun
 if [ $1 = 0 ]; then
-  /usr/bin/systemctl stop %{service_name}
-  /usr/bin/systemctl disable %{service_name}
+  %service_add_preun %{service_name}.service
 fi
 
 %clean
