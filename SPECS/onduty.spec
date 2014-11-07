@@ -87,4 +87,5 @@ rm -rf $RPM_BUILD_ROOT
 %{appdir}
 %attr(755,%{onduty_user},%{onduty_group}) %{logdir}
 %attr(755,%{onduty_user},%{onduty_group}) %{tmpdir}
+%config(noreplace) %{buildroot}%{_sysconfdir}/puma.rb
 %doc
