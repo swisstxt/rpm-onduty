@@ -87,4 +87,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_unitdir}/%{service_name}.service
 %defattr(-,root,root,-)
 %{appdir}
+%attr(755,%{onduty_user},%{onduty_group}) %{logdir}
+%attr(755,%{onduty_user},%{onduty_group}) %{tmpdir}
 %doc
