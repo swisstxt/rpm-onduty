@@ -11,7 +11,7 @@ Group=onduty
 PIDFile=/srv/onduty/tmp/puma.pid
 WorkingDirectory=/srv/onduty
 Environment="RACK_ENV=production"
-ExecStart=/srv/onduty/bin/puma config.ru
+ExecStart=/srv/onduty/bin/puma -C config/puma.rb config.ru
 ExecReload=/bin/kill -s SIGUSR2 $MAINPID
 ExecStop=/bin/kill -s SIGTERM $MAINPID
 TimeoutSec=10
