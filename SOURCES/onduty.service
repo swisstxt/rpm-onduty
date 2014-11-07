@@ -4,13 +4,17 @@ After=syslog.target
 After=network.target
 
 [Service]
-Type=simple
+Type=forking
+SyslogIdentifier=onduty
 User=onduty
 Group=onduty
+PIDFile=/srv/onduty/tmp/puma.pid
+WorkingDirectory=/srv/onduty
 Environment="RACK_ENV=production"
-ExecStart=/srv/onduty/bin/puma --config /srv/onduty/config/puma.rb /srv/onduty/config.ru
-# Give a reasonable amount of time for the workers to start up/shut down
-TimeoutSec=300
+ExecStart=bin/puma -b unix://tmp/puma.sock --pidfile tmp/puma.pid --state tmp/puma.state config.ru
+ExecReload=/bin/kill -s SIGUSR2 $MAINPID
+ExecStop=/bin/kill -s SIGTERM $MAINPID
+TimeoutSec=15
 
 [Install]
 WantedBy=multi-user.target
