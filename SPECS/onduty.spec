@@ -55,11 +55,11 @@ mkdir -p %{buildroot}%{appdir}
 mkdir -p %{buildroot}%{tmpdir}
 mkdir -p %{buildroot}%{cfgdir}
 
-install -p -D -m 0755 %{SOURCE1} %{buildroot}%{_unitdir}%{service_name}.service
-install -p -m 0755 %{SOURCE2} %{buildroot}%{cfgdir}puma.rb
+install -p -D -m 0755 %{SOURCE1} %{buildroot}%{_unitdir}/%{service_name}.service
+install -p -m 0755 %{SOURCE2} %{buildroot}%{cfgdir}/puma.rb
 
 pushd %{name}
-  mv * .bundle $RPM_BUILD_ROOT/%{appdir}
+  mv * .bundle %{buildroot}/%{appdir}
 popd
 rm -f %{buildroot}%{appdir}log/.gitkeep
 
