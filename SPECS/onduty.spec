@@ -51,26 +51,21 @@ popd
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/%{appdir}
-mkdir -p %{buildroot}/%{tmpdir}
+mkdir -p %{buildroot}%{appdir}
+mkdir -p %{buildroot}%{tmpdir}
+mkdir -p %{buildroot}%{cfgdir}
 
-install -p -D -m 0755 %{SOURCE1} %{buildroot}%{_unitdir}/%{service_name}.service
-install -p -m 0755 %{SOURCE2} %{buildroot}%{cfgdir}/puma.rb
+install -p -D -m 0755 %{SOURCE1} %{buildroot}%{_unitdir}%{service_name}.service
+install -p -m 0755 %{SOURCE2} %{buildroot}%{cfgdir}puma.rb
 
 pushd %{name}
   mv * .bundle $RPM_BUILD_ROOT/%{appdir}
 popd
-rm -f $RPM_BUILD_ROOT/%{appdir}/log/.gitkeep
+rm -f %{buildroot}%{appdir}log/.gitkeep
 
 %pre
-if [ $1 -eq 1 ]; then
-  getent group %{onduty_group} > /dev/null || groupadd -r %{onduty_group}
-  getent passwd %{onduty_user} > /dev/null || \
-    useradd -r -d %{appdir} -g %{onduty_group} \
-    -s /sbin/nologin -c "Onduty server" %{onduty_user}
-  exit 0
-  %service_add_pre %{service_name}.service
-fi
+%{_sbindir}/useradd -c "Onduty user" -s /bin/false -r -d %{appdir} %{onduty_user} 2>/dev/null || :
+%service_add_pre %{service_name}.service
 
 %post
 if [ $1 == 1 ]; then
