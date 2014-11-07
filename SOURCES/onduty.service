@@ -11,10 +11,10 @@ Group=onduty
 PIDFile=/srv/onduty/tmp/puma.pid
 WorkingDirectory=/srv/onduty
 Environment="RACK_ENV=production"
-ExecStart=bin/puma -b unix://tmp/puma.sock --pidfile tmp/puma.pid --state tmp/puma.state config.ru
+ExecStart=/srv/onduty/bin/puma config.ru
 ExecReload=/bin/kill -s SIGUSR2 $MAINPID
 ExecStop=/bin/kill -s SIGTERM $MAINPID
-TimeoutSec=15
+TimeoutSec=10
 
 [Install]
 WantedBy=multi-user.target
