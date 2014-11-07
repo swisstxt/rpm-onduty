@@ -55,7 +55,7 @@ mkdir -p %{buildroot}%{appdir}
 mkdir -p %{buildroot}%{tmpdir}
 mkdir -p %{buildroot}%{_sysconfdir}/%{name}
 
-%{__install} -p -d -m 0755 %{SOURCE1} %{buildroot}%{_unitdir}/
+%{__install} -p -D -m 0755 %{SOURCE1} %{buildroot}%{_unitdir}/%{name}.service
 %{__install} -p -m 0755 %{SOURCE2} %{buildroot}%{_sysconfdir}/%{name}
 %{__install} -p -m 0644 %{SOURCE2}  %{buildroot}%{_sysconfdir}/%{name}
 
