@@ -1,4 +1,4 @@
-%global  service_name  onduty-server
+%global  service_name  onduty
 %global  onduty_user   onduty
 %global  onduty_group  %{onduty_user}
 
@@ -53,10 +53,11 @@ popd
 rm -rf %{buildroot}
 mkdir -p %{buildroot}%{appdir}
 mkdir -p %{buildroot}%{tmpdir}
-mkdir -p %{buildroot}%{cfgdir}
+mkdir -p %{buildroot}%{_sysconfdir}/%{name}
 
-install -p -D -m 0755 %{SOURCE1} %{buildroot}%{_unitdir}/%{service_name}.service
-install -p -m 0755 %{SOURCE2} %{buildroot}%{cfgdir}/puma.rb
+%{__install} -p -D -m 0755 %{SOURCE1} %{buildroot}%{_unitdir}
+%{__install} -p -m 0755 %{SOURCE2} %{buildroot}%{_sysconfdir}/%{name}
+%{__install} -p -m 0644 %{SOURCE2}  %{buildroot}%{_sysconfdir}/%{name}
 
 pushd %{name}
   mv * .bundle %{buildroot}/%{appdir}
