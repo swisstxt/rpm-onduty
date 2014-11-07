@@ -55,7 +55,7 @@ mkdir -p %{buildroot}/%{appdir}
 mkdir -p %{buildroot}/%{tmpdir}
 
 install -p -D -m 0755 %{SOURCE0} %{buildroot}%{_unitdir}/%{service_name}.service
-install -p -D -m 0755 %{SOURCE1} %{buildroot}%{cfgdir}/puma.rb
+install -m 0755 %{SOURCE1} %{buildroot}%{cfgdir}/puma.rb
 
 pushd %{name}
   mv * .bundle $RPM_BUILD_ROOT/%{appdir}
