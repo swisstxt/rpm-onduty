@@ -62,7 +62,8 @@ mkdir -p %{buildroot}%{_sysconfdir}/%{name}
 pushd %{name}
   mv * .bundle %{buildroot}/%{appdir}
 popd
-rm -f %{buildroot}%{appdir}log/.gitkeep
+rm -f %{buildroot}%{logdir}/.gitignore
+rm -f %{buildroot}%{tmpdir}/.gitignore
 
 %pre
 if [ $1 -eq 1 ]; then
