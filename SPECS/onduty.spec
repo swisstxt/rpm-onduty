@@ -12,8 +12,8 @@ License:        commercial
 URL:            https://github.com/swisstxt/onduty
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Source0:        onduty.service
-Source1:        puma.rb
+Source1:        onduty.service
+Source2:        puma.rb
 
 BuildRequires: ruby rubygems rubygem-bundler
 BuildRequires: gcc libxml2 libxml2-devel libxslt libxslt-devel openssl-devel
@@ -54,8 +54,8 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{appdir}
 mkdir -p %{buildroot}/%{tmpdir}
 
-install -p -D -m 0755 %{Source0} %{buildroot}%{_unitdir}/%{service_name}.service
-install -m 0755 %{Source1} %{buildroot}%{cfgdir}/puma.rb
+install -p -D -m 0755 %{SOURCE1} %{buildroot}%{_unitdir}/%{service_name}.service
+install -p -m 0755 %{SOURCE2} %{buildroot}%{cfgdir}/puma.rb
 
 pushd %{name}
   mv * .bundle $RPM_BUILD_ROOT/%{appdir}
