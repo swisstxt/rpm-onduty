@@ -94,6 +94,5 @@ rm -rf $RPM_BUILD_ROOT
 %{appdir}
 %attr(755,%{onduty_user},%{onduty_group}) %{logdir}
 %attr(755,%{onduty_user},%{onduty_group}) %{tmpdir}
-%attr(755,%{onduty_user},%{onduty_group}) %{appdir}/db/production.sqlite3
 %config(noreplace) %{_sysconfdir}/%{name}/puma.rb
 %doc
