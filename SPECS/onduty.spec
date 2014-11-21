@@ -14,6 +14,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Source1:        onduty.service
 Source2:        puma.rb
+Source3:        mongoid.yml
 
 BuildRequires: ruby rubygems rubygem-bundler
 BuildRequires: gcc libxml2 libxml2-devel libxslt libxslt-devel openssl-devel
@@ -57,7 +58,8 @@ mkdir -p %{buildroot}%{_sysconfdir}/%{name}
 
 %{__install} -p -D -m 0755 %{SOURCE1} %{buildroot}%{_unitdir}/%{name}.service
 %{__install} -p -m 0755 %{SOURCE2} %{buildroot}%{_sysconfdir}/%{name}
-%{__install} -p -m 0644 %{SOURCE2}  %{buildroot}%{_sysconfdir}/%{name}
+%{__install} -p -m 0755 %{SOURCE2}  %{buildroot}%{_sysconfdir}/%{name}
+%{__install} -p -m 0755 %{SOURCE3}  %{buildroot}%{_sysconfdir}/%{name}
 
 pushd %{name}
   mv * .bundle %{buildroot}/%{appdir}
