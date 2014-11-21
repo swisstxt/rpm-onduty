@@ -1,0 +1,15 @@
+production:
+  # Configure available database sessions. (required)
+  sessions:
+    # Defines the default session. (required)
+    default:
+      # Defines the name of the default database that Mongoid can connect to.
+      # (required).
+      database: infrabrain_production
+      # Provides the hosts the default session can connect to. Must be an array
+      # of host:port pairs. (required)
+      username: onduty
+      password: sooo_duty!
+      hosts:
+        - mongo01.stxt.media.int:27017
+        - mongo02.stxt.media.int:27017
